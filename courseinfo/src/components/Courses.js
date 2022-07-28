@@ -1,14 +1,8 @@
-import Header from "./Header"
-import Content from "./Content"
-import Total from "./Total"
+import Course from "./Course"
 
-const Courses = ({courses}) => <div>
+const Courses = ({courses}) => <>
   <h1>Web development curriculum</h1>
-  {courses.map(course => <div key={course.id}>
-    <Header course={course} />
-    <Content course={course} />
-    <Total course={course} />
-  </div>)}
-</div>
+  {courses.map(course => <Course key={course.id} course={course} />)}
+</>
 
 export default Courses
