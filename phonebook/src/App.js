@@ -14,7 +14,7 @@ const App = () => {
   const onChange = event => setNewName(event.target.value)
   const showPersons = persons.map(person => <div key={person.name}>{person.name}</div>)
 
-  return  <>
+  return  <div>
             <h2>Phonebook</h2>
             <form onSubmit={onSubmit} >
               <div>
@@ -26,7 +26,7 @@ const App = () => {
             </form>
             <h2>Numbers</h2>
             {showPersons}
-          </>
+          </div>
 }
 
 export default App
