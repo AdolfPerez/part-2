@@ -9,18 +9,23 @@ const App = () => {
 
   const onSubmit = event => {
     event.preventDefault()
-    const exists = persons.filter(person => newName === person.name)
-    if (exists[0]) {
-      alert(`${newName} is already added to phonebook`) 
+    if(!newName) {
+      alert(`add a name`)
     } else {
-      if (newNumber) {
-        setPersons(persons.concat({name: newName, number: newNumber}))
-        setNewName('')
-        setNewNumber('')
+      const exists = persons.filter(person => newName === person.name)
+      if (exists[0]) {
+        alert(`${newName} is already added to phonebook`) 
       } else {
-        alert(`add a number`)
+        if (newNumber) {
+          setPersons(persons.concat({name: newName, number: newNumber}))
+          setNewName('')
+          setNewNumber('')
+        } else {
+          alert(`add a number`)
+        }
       }
-    }}
+    }
+  }
   const onChangeNewName = event => setNewName(event.target.value)
   const onChangeNewNumber = event => setNewNumber(event.target.value)
   const showPersons = persons.map(person => <div key={person.name}>{person.name} {person.number}</div>)
