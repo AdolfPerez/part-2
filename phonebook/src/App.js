@@ -1,7 +1,15 @@
 import React, { useState } from 'react'
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
+import Persons from './components/Persons'
 
 const App = () => {
-  const [ persons, setPersons ] = useState([{ name: 'Arto Hellas', number: '9876543210' }]) 
+  const [ persons, setPersons ] = useState([
+    { name: 'Arto Hellas', number: '9876543210' },
+    { name: 'Ada Lovelace', number: '39-44-5323523' },
+    { name: 'Dan Abramov', number: '12-43-234345' },
+    { name: 'Mary Poppendieck', number: '39-23-6423122' }
+  ]) 
   const [ toPrint, setToPrint ] = useState(persons)
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
@@ -31,21 +39,16 @@ const App = () => {
 
   return  <>
             <h2>Phonebook</h2>
-            filter shown with<input onChange={filter} />
-            <h2>add a new</h2>
-            <form onSubmit={onSubmit} >
-              <div>
-                name: <input value={newName} onChange={onChangeNewName} />
-              </div>
-              <div>
-                number: <input value={newNumber} onChange={onChangeNewNumber} />
-              </div>
-              <div>
-                <button type="submit">add</button>
-              </div>
-            </form>
-            <h2>Numbers</h2>
-            {toPrint.map( person => <div key={person.name}> {person.name} {person.number} </div> )}
+            <Filter filter={filter} />
+            <h2>Add a new</h2>
+            <PersonForm
+            onSubmit={onSubmit}
+            newName ={newName} 
+            onChangeNewName={onChangeNewName}
+            newNumber={newNumber}
+            onChangeNewNumber={onChangeNewNumber} />
+            <h3>Numbers</h3>
+            <Persons toPrint={toPrint} />
           </>
 }
 
