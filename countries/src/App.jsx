@@ -23,7 +23,7 @@ const App = () => {
           (print.length === 1 ?
             <ShowCountry country={print[0]} /> :
             (print.length <= 10 ?
-              print.map( (country, i) => <div key={i}> {i + 1} - {country.name.common}</div>) :
+              print.map( (country, i) => <div key={i}> {i + 1} - {country.name.common} <button onClick={ () => { setToPrint([country]) } }> Show </button> </div>) :
               <div>Too many matches, specify another filter</div>)) }
     </>
   )
