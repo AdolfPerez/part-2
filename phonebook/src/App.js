@@ -45,6 +45,20 @@ const App = () => {
   const onChangeNewName = event => setNewName(event.target.value)
   const onChangeNewNumber = event => setNewNumber(event.target.value)
   const filter = event => setToPrint(persons.filter(person => person.name.toLowerCase().slice(0, event.target.value.length) === event.target.value.toLowerCase()))
+  const deleteOne = person => {
+    if(window.confirm(`Delete ${person.name}?`)){
+      personService
+      .deleteOne(person.id)
+      .then(deletedPerson => {
+        personService
+        .getAll()
+        .then(returnedPersons => {
+          setToPrint(returnedPersons)
+          setPersons(returnedPersons)
+        })
+      })
+    }
+  }
 
   return  <>
             <h2>Phonebook</h2>
@@ -57,7 +71,7 @@ const App = () => {
             newNumber={newNumber}
             onChangeNewNumber={onChangeNewNumber} />
             <h3>Numbers</h3>
-            <Persons toPrint={toPrint} />
+            <Persons toPrint={toPrint} deleteOne={deleteOne} />
           </>
 }
 
