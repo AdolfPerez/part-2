@@ -13,9 +13,9 @@ const App = () => {
   useEffect(() => {
     personService
     .getAll()
-    .then(({data}) => {
-      setPersons(data)
-      setToPrint(data)
+    .then(initialPersons => {
+      setPersons(initialPersons)
+      setToPrint(initialPersons)
     })
   }, [])
 
@@ -30,8 +30,8 @@ const App = () => {
       } else if (newNumber) {
         personService
           .create({name: newName, number: newNumber})
-          .then(response => {
-            const newPersons = persons.concat(response.data)
+          .then(returnedPerson => {
+            const newPersons = persons.concat(returnedPerson)
             setPersons(newPersons)
             setToPrint(newPersons)
             setNewName('')
