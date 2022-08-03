@@ -26,7 +26,24 @@ const App = () => {
     } else {
       const exists = persons.filter(person => newName === person.name)
       if (exists[0]) {
-        alert(`${newName} is already added to phonebook`) 
+        if(window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)){
+          if(newNumber){
+            personService
+            .update(exists[0].id, {...exists[0], number: newNumber})
+            .then(updatedPerson =>
+              personService.getAll()
+              .then(returnedPersons => {
+                  setToPrint(returnedPersons)
+                  setPersons(returnedPersons)
+                  setNewName('')
+                  setNewNumber('')
+                }
+              )
+            )
+          } else {
+            alert(`add a number`)
+          }
+        }
       } else if (newNumber) {
         personService
           .create({name: newName, number: newNumber})
