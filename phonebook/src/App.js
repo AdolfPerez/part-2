@@ -50,6 +50,23 @@ const App = () => {
               )
               .catch(error => console.error(error))
             })
+            .catch(error => {
+              setColor('red')
+              setMessage(`Person '${exists[0].name}' was already removed from server`)
+              setTimeout(() => {
+                setMessage(null)                
+              }, 5000)
+              personService
+              .getAll()
+              .then(returnedPersons => {
+                  setToPrint(returnedPersons)
+                  setPersons(returnedPersons)
+                  setNewName('')
+                  setNewNumber('')
+                }
+              )
+              .catch(error => console.error(error))
+            })
           } else {
             alert(`add a number`)
           }
